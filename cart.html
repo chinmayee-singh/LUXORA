@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<title>LUXORA Cart</title>
+
+<link rel="stylesheet" href="landing-page.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+<h2 class="logo">LUXORA</h2>
+
+<nav>
+
+<a href="landing-page.html">Home</a>
+<a href="landing-page.html">Shop</a>
+<a href="#">Cart 🛍</a>
+
+</nav>
+
+</header>
+
+
+<section class="products">
+
+<h2>Your Cart</h2>
+
+<div id="cart-items" class="product-grid"></div>
+
+<h3 id="cart-total"></h3>
+
+<!-- ✅ FIXED: removed the duplicate button, only ONE now -->
+<a href="checkout.html">
+<button class="add-cart" style="margin-top:20px;">Proceed to Checkout</button>
+</a>
+
+</section>
+
+
+<footer>
+
+<p>© 2026 LUXORA Beauty & Fashion</p>
+
+</footer>
+
+
+<script>
+
+/* AUTH CHECK */
+if(!localStorage.getItem("luxoraUser")){
+  window.location.href = "login.html";
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+
+const cartContainer = document.getElementById("cart-items");
+const totalDisplay = document.getElementById("cart-total");
+
+let cart = JSON.parse(localStorage.getItem("luxoraCart")) || [];
+
+let total = 0;
+
+/* EMPTY CART */
+
+if(cart.length === 0){
+
+cartContainer.innerHTML = `
+<div class="card">
+<h3>Your cart is empty</h3>
+<p>Add products from the shop.</p>
+<a href="landing-page.html">
+<button class="add-cart">Go Shopping</button>
+</a>
+</div>
+`;
+
+return;
+
+}
+
+/* SHOW CART ITEMS */
+
+cart.forEach((product,index)=>{
+
+if(!product.quantity){
+product.quantity = 1;
+}
+
+const item=document.createElement("div");
+item.classList.add("card");
+
+item.innerHTML=`
+
+<img src="${product.image}">
+
+<h3>${product.name}</h3>
+
+<p class="price">${product.price}</p>
+
+<div class="quantity">
+
+<button onclick="changeQty(${index}, -1)">−</button>
+
+<span>${product.quantity}</span>
+
+<button onclick="changeQty(${index}, 1)">+</button>
+
+</div>
+
+<button onclick="removeItem(${index})">Remove</button>
+
+`;
+
+cartContainer.appendChild(item);
+
+const priceNumber = parseInt(product.price.replace("₹","").replace(",",""));
+
+total += priceNumber * product.quantity;
+
+});
+
+totalDisplay.innerText = "Total: ₹" + total;
+
+});
+
+
+/* REMOVE ITEM */
+
+function removeItem(index){
+
+let cart = JSON.parse(localStorage.getItem("luxoraCart")) || [];
+
+cart.splice(index,1);
+
+localStorage.setItem("luxoraCart",JSON.stringify(cart));
+
+location.reload();
+
+}
+
+
+/* CHANGE QUANTITY */
+
+function changeQty(index, amount){
+
+let cart = JSON.parse(localStorage.getItem("luxoraCart")) || [];
+
+if(!cart[index].quantity){
+cart[index].quantity = 1;
+}
+
+cart[index].quantity += amount;
+
+if(cart[index].quantity < 1){
+cart[index].quantity = 1;
+}
+
+localStorage.setItem("luxoraCart", JSON.stringify(cart));
+
+location.reload();
+
+}
+
+</script>
+
+
+</body>
+
+</html>

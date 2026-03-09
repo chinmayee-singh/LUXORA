@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<title>LUXORA Login</title>
+
+<link rel="stylesheet" href="landing-page.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header class="navbar">
+<h2 class="logo">LUXORA</h2>
+</header>
+
+<div class="auth-container">
+
+<div class="auth-box">
+
+<h2 id="auth-title">Login</h2>
+
+<input type="email" id="email" placeholder="Email">
+
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="auth()" id="auth-btn">Login</button>
+
+<p class="switch" onclick="toggleAuth()">Don't have an account? Signup</p>
+
+</div>
+
+</div>
+
+<script>
+
+let isLogin = true;
+
+function toggleAuth(){
+
+  const title      = document.getElementById("auth-title");
+  const btn        = document.getElementById("auth-btn");
+  const switchText = document.querySelector(".switch");
+
+  if(isLogin){
+    title.innerText      = "Signup";
+    btn.innerText        = "Signup";
+    switchText.innerText = "Already have an account? Login";
+  } else {
+    title.innerText      = "Login";
+    btn.innerText        = "Login";
+    switchText.innerText = "Don't have an account? Signup";
+  }
+
+  isLogin = !isLogin;
+
+}
+
+function auth(){
+
+  const email    = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  if(!email || !password){
+    alert("Please fill all fields");
+    return;
+  }
+
+  // ✅ FIX: simple string store
+  localStorage.setItem("luxoraUser", email);
+
+  window.location.href = "landing-page.html";
+
+}
+
+</script>
+
+</body>
+</html>

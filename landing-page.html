@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<title>LUXORA</title>
+
+<link rel="stylesheet" href="landing-page.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- PAGE LOADER -->
+<div id="page-loader" style="position:fixed;top:0;left:0;width:100%;height:100%;
+background:#fdf7f9;display:flex;flex-direction:column;align-items:center;
+justify-content:center;z-index:99999;">
+  <h2 style="font-size:48px;color:#a26769;letter-spacing:10px;">LUXORA</h2>
+  <p style="color:#d8a7b1;letter-spacing:4px;font-size:13px;margin-top:10px;">Beauty & Fashion</p>
+  <div style="display:flex;gap:8px;margin-top:20px;">
+    <span style="width:10px;height:10px;background:#d8a7b1;border-radius:50%;display:inline-block;animation:bounce-dot 1.2s infinite;"></span>
+    <span style="width:10px;height:10px;background:#d8a7b1;border-radius:50%;display:inline-block;animation:bounce-dot 1.2s infinite;animation-delay:0.2s;"></span>
+    <span style="width:10px;height:10px;background:#d8a7b1;border-radius:50%;display:inline-block;animation:bounce-dot 1.2s infinite;animation-delay:0.4s;"></span>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- BACK TO TOP -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<header class="navbar">
+<a href="#" onclick="logout()">Logout</a>
+
+<h2 class="logo">LUXORA</h2>
+
+<input type="text" id="search-bar" placeholder="Search products...">
+
+<nav>
+
+<a href="#">Fashion</a>
+<a href="#">Makeup</a>
+<a href="#">Skincare</a>
+<a href="#">Bags</a>
+<a href="cart.html">Cart 🛍 (<span id="cart-count">0</span>)</a>
+
+</nav>
+
+</header>
+
+<!-- HERO SECTION -->
+
+<section class="hero">
+
+<div class="hero-left">
+
+<h1>Luxury Fashion & Beauty</h1>
+
+<p>Discover your perfect style</p>
+
+<button id="shop-btn">Shop Now</button>
+
+</div>
+
+<div class="hero-right">
+
+<img src="Images/1.webp">
+
+</div>
+
+</section>
+
+<!-- PRODUCTS -->
+
+<section class="products">
+
+<h2>Featured Products</h2>
+
+<div class="filters">
+
+<button class="filter-btn" data-category="all">All</button>
+<button class="filter-btn" data-category="fashion">Fashion</button>
+<button class="filter-btn" data-category="makeup">Makeup</button>
+<button class="filter-btn" data-category="skincare">Skincare</button>
+<button class="filter-btn" data-category="fragrance">Fragrance</button>
+<button class="filter-btn" data-category="haircare">Haircare</button>
+
+</div>
+
+<div class="product-grid" id="product-grid">
+
+<!-- PRODUCT 1 -->
+<div class="card" data-category="fashion" data-name="elegant dress">
+<div class="card-image">
+<img src="Images/dress.webp" onerror="this.src='https://via.placeholder.com/400x220/f7e6ea/a26769?text=LUXORA'">
+<button class="wishlist">♡</button>
+<button class="quick-view">Quick View</button>
+</div>
+<h3>Elegant Dress</h3>
+<div class="rating">★★★★★</div>
+<p class="price">₹2499</p>
+<button class="add-cart">Add to Cart</button>
+</div>
+
+<!-- PRODUCT 2 -->
+<div class="card" data-category="makeup" data-name="matte lipstick">
+<div class="card-image">
+<img src="Images/lipstick.webp" onerror="this.src='https://via.placeholder.com/400x220/f7e6ea/a26769?text=LUXORA'">
+<button class="wishlist">♡</button>
+<button class="quick-view">Quick View</button>
+</div>
+<h3>Matte Lipstick</h3>
+<div class="rating">★★★★☆</div>
+<p class="price">₹799</p>
+<button class="add-cart">Add to Cart</button>
+</div>
+
+<!-- PRODUCT 3 -->
+<div class="card" data-category="skincare" data-name="glow serum">
+<div class="card-image">
+<img src="Images/serum.jpg" onerror="this.src='https://via.placeholder.com/400x220/f7e6ea/a26769?text=LUXORA'">
+<button class="wishlist">♡</button>
+<button class="quick-view">Quick View</button>
+</div>
+<h3>Glow Serum</h3>
+<div class="rating">★★★★★</div>
+<p class="price">₹1299</p>
+<button class="add-cart">Add to Cart</button>
+</div>
+
+<!-- PRODUCT 4 -->
+<div class="card" data-category="makeup" data-name="luxury foundation">
+<div class="card-image">
+<img src="Images/foundation.jpg" onerror="this.src='https://via.placeholder.com/400x220/f7e6ea/a26769?text=LUXORA'">
+<button class="wishlist">♡</button>
+<button class="quick-view">Quick View</button>
+</div>
+<h3>Luxury Foundation</h3>
+<div class="rating">★★★★☆</div>
+<p class="price">₹1199</p>
+<button class="add-cart">Add to Cart</button>
+</div>
+
+<!-- PRODUCT 5 -->
+<div class="card" data-category="fashion" data-name="designer bag">
+<div class="card-image">
+<img src="Images/bags.webp" onerror="this.src='https://via.placeholder.com/400x220/f7e6ea/a26769?text=LUXORA'">
+<button class="wishlist">♡</button>
+<button class="quick-view">Quick View</button>
+</div>
+<h3>Designer Bag</h3>
+<div class="rating">★★★★★</div>
+<p class="price">₹2999</p>
+<button class="add-cart">Add to Cart</button>
+</div>
+
+<!-- PRODUCT 6 -->
+<div class="card" data-category="fashion" data-name="stylish heels">
+<div class="card-image">
+<img src="Images/heels.webp" onerror="this.src='https://via.placeholder.com/400x220/f7e6ea/a26769?text=LUXORA'">
+<button class="wishlist">♡</button>
+<button class="quick-view">Quick View</button>
+</div>
+<h3>Stylish Heels</h3>
+<div class="rating">★★★★☆</div>
+<p class="price">₹1999</p>
+<button class="add-cart">Add to Cart</button>
+</div>
+
+<!-- PRODUCT 7 -->
+<div class="card" data-category="skincare" data-name="rose face cream">
+<div class="card-image">
+<img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=400" onerror="this.src='https://via.placeholder.com/400x220/f7e6ea/a26769?text=LUXORA'">
+<button class="wishlist">♡</button>
+<button class="quick-view">Quick View</button>
+</div>
+<h3>Rose Face Cream</h3>
+<div class="rating">★★★★★</div>
+<p class="price">₹899</p>
+<button class="add-cart">Add to Cart</button>
+</div>
+
+<!-- PRODUCT 8 -->
+<div class="card" data-category="fragrance" data-name="midnight bloom perfume">
+<div class="card-image">
+<img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400" onerror="this.src='https://via.placeholder.com/400x220/f7e6ea/a26769?text=LUXORA'">
+<button class="wishlist">♡</button>
+<button class="quick-view">Quick View</button>
+</div>
+<h3>Midnight Bloom Perfume</h3>
+<div class="rating">★★★★★</div>
+<p class="price">₹2199</p>
+<button class="add-cart">Add to Cart</button>
+</div>
+
+<!-- PRODUCT 9 -->
+<div class="card" data-category="makeup" data-name="gold shimmer palette">
+<div class="card-image">
+<img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400" onerror="this.src='https://via.placeholder.com/400x220/f7e6ea/a26769?text=LUXORA'">
+<button class="wishlist">♡</button>
+<button class="quick-view">Quick View</button>
+</div>
+<h3>Gold Shimmer Palette</h3>
+<div class="rating">★★★★☆</div>
+<p class="price">₹1599</p>
+<button class="add-cart">Add to Cart</button>
+</div>
+
+<!-- PRODUCT 10 -->
+<div class="card" data-category="haircare" data-name="silk hair serum">
+<div class="card-image">
+<img src="https://images.unsplash.com/photo-1526045612212-70caf35c14df?w=400" onerror="this.src='https://via.placeholder.com/400x220/f7e6ea/a26769?text=LUXORA'">
+<button class="wishlist">♡</button>
+<button class="quick-view">Quick View</button>
+</div>
+<h3>Silk Hair Serum</h3>
+<div class="rating">★★★★★</div>
+<p class="price">₹749</p>
+<button class="add-cart">Add to Cart</button>
+</div>
+
+<!-- PRODUCT 11 -->
+<div class="card" data-category="fashion" data-name="silk scarf">
+<div class="card-image">
+<img src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=400" onerror="this.src='https://via.placeholder.com/400x220/f7e6ea/a26769?text=LUXORA'">
+<button class="wishlist">♡</button>
+<button class="quick-view">Quick View</button>
+</div>
+<h3>Silk Scarf</h3>
+<div class="rating">★★★★☆</div>
+<p class="price">₹1299</p>
+<button class="add-cart">Add to Cart</button>
+</div>
+
+<!-- PRODUCT 12 -->
+<div class="card" data-category="skincare" data-name="vitamin c brightening toner">
+<div class="card-image">
+<img src="https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?w=400" onerror="this.src='https://via.placeholder.com/400x220/f7e6ea/a26769?text=LUXORA'">
+<button class="wishlist">♡</button>
+<button class="quick-view">Quick View</button>
+</div>
+<h3>Vitamin C Brightening Toner</h3>
+<div class="rating">★★★★★</div>
+<p class="price">₹999</p>
+<button class="add-cart">Add to Cart</button>
+</div>
+
+<!-- PRODUCT 13 -->
+<div class="card" data-category="makeup" data-name="velvet blush duo">
+<div class="card-image">
+<img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400" onerror="this.src='https://via.placeholder.com/400x220/f7e6ea/a26769?text=LUXORA'">
+<button class="wishlist">♡</button>
+<button class="quick-view">Quick View</button>
+</div>
+<h3>Velvet Blush Duo</h3>
+<div class="rating">★★★★☆</div>
+<p class="price">₹849</p>
+<button class="add-cart">Add to Cart</button>
+</div>
+
+<!-- PRODUCT 14 -->
+<div class="card" data-category="fragrance" data-name="rose oud eau de parfum">
+<div class="card-image">
+<img src="https://images.unsplash.com/photo-1592945403407-9caf930a2b74?w=400" onerror="this.src='https://via.placeholder.com/400x220/f7e6ea/a26769?text=LUXORA'">
+<button class="wishlist">♡</button>
+<button class="quick-view">Quick View</button>
+</div>
+<h3>Rose Oud Eau de Parfum</h3>
+<div class="rating">★★★★★</div>
+<p class="price">₹3499</p>
+<button class="add-cart">Add to Cart</button>
+</div>
+
+<!-- PRODUCT 15 -->
+<div class="card" data-category="haircare" data-name="argan oil hair mask">
+<div class="card-image">
+<img src="https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=400" onerror="this.src='https://via.placeholder.com/400x220/f7e6ea/a26769?text=LUXORA'">
+<button class="wishlist">♡</button>
+<button class="quick-view">Quick View</button>
+</div>
+<h3>Argan Oil Hair Mask</h3>
+<div class="rating">★★★★☆</div>
+<p class="price">₹649</p>
+<button class="add-cart">Add to Cart</button>
+</div>
+
+</div>
+
+<!-- NO RESULTS -->
+<div id="no-results" style="display:none;">
+  <p style="font-size:50px;">🔍</p>
+  <h3>No results found</h3>
+  <p>Try searching something like "lipstick", "serum" or "dress"</p>
+</div>
+
+</section>
+
+<footer>
+<p>© 2026 LUXORA Beauty & Fashion</p>
+</footer>
+
+<script src="landing-page.js"></script>
+
+<script>
+  setTimeout(function(){
+    document.getElementById("page-loader").style.display = "none";
+  }, 1500);
+</script>
+</body>
+</body>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<title>LUXORA Checkout</title>
+
+<link rel="stylesheet" href="landing-page.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+  <h2 class="logo">LUXORA</h2>
+
+  <nav>
+    <a href="landing-page.html">Home</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+
+</header>
+
+<section class="products">
+
+  <h2>Order Summary</h2>
+
+  <div id="checkout-items"></div>
+
+  <h3 id="checkout-total"></h3>
+
+  <button id="place-order" class="add-cart">Place Order</button>
+
+</section>
+
+<footer>
+  <p>© 2026 LUXORA Beauty & Fashion</p>
+</footer>
+
+<script>
+
+  let cart = JSON.parse(localStorage.getItem("luxoraCart")) || [];
+
+  if(cart.length === 0){
+    alert("Your cart is empty. Add products first.");
+    window.location.href = "cart.html";
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+
+    const container    = document.getElementById("checkout-items");
+    const totalDisplay = document.getElementById("checkout-total");
+
+    let cart = JSON.parse(localStorage.getItem("luxoraCart")) || [];
+    let total = 0;
+
+    if(cart.length === 0){
+      container.innerHTML = "<h3>Your cart is empty</h3>";
+      return;
+    }
+
+    cart.forEach(product => {
+
+      if(!product.quantity){
+        product.quantity = 1;
+      }
+
+      const item = document.createElement("div");
+      item.classList.add("card");
+
+      item.innerHTML = `
+        <img src="${product.image}">
+        <h3>${product.name}</h3>
+        <p>${product.price}</p>
+        <p>Qty: ${product.quantity}</p>
+      `;
+
+      container.appendChild(item);
+
+      const price = parseInt(product.price.replace("₹","").replace(",",""));
+      total += price * product.quantity;
+
+    });
+
+    totalDisplay.innerText = "Total: ₹" + total;
+
+  });
+
+  document.getElementById("place-order").addEventListener("click", function(){
+
+    localStorage.setItem("orderPlaced", "true");
+    localStorage.removeItem("luxoraCart");
+
+    // ✅ FIXED: was TWO window.location.href lines so order-success.html
+    // was never reached — removed the second one
+    window.location.href = "order-success.html";
+
+  });
+
+</script>
+
+</body>
+</html>

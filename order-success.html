@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<title>Order Confirmed</title>
+
+<link rel="stylesheet" href="landing-page.css">
+
+</head>
+
+<body>
+
+<section class="success-page">
+
+  <h1>🎉 Order Placed Successfully!</h1>
+
+  <p>Thank you for shopping with LUXORA.</p>
+
+  <!-- ✅ FIXED: was broken nested <a> tags with a dead <a href="checkout.html"></a>
+       inside the outer <a> — removed the inner dead link -->
+  <a href="landing-page.html">
+    <button>Continue Shopping</button>
+  </a>
+
+</section>
+
+<script>
+
+  let order = localStorage.getItem("orderPlaced");
+
+  if(!order){
+    window.location.href = "cart.html";
+  }
+
+  localStorage.removeItem("orderPlaced");
+
+</script>
+
+</body>
+</html>
