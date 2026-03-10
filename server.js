@@ -15,7 +15,7 @@ const Product = require("./models/product");
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, "public")));
 
 /* MONGODB CONNECTION */
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/luxoraDB")
@@ -54,7 +54,7 @@ async function seedProducts(){
 
 /* HOME ROUTE */
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "landing-page.html"));
+  res.sendFile(path.join(__dirname, "public", "landing-page.html"));
 });
 
 /* GET ALL PRODUCTS */
