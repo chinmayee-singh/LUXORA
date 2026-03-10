@@ -1,8 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const path = require("path");
 
 /* IMPORT MODELS */
 const User    = require("./models/user");
@@ -13,9 +15,10 @@ const Product = require("./models/product");
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname)));
 
 /* MONGODB CONNECTION */
-mongoose.connect("mongodb://localhost:27017/luxoraDB")
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/luxoraDB")
 .then(()=> {
   console.log("MongoDB Connected ✅");
   seedProducts(); // auto seed karo agar products nahi hain
@@ -51,7 +54,7 @@ async function seedProducts(){
 
 /* HOME ROUTE */
 app.get("/", (req, res) => {
-  res.send("LUXORA backend running 🚀");
+  res.sendFile(path.join(__dirname, "landing-page.html"));
 });
 
 /* GET ALL PRODUCTS */
@@ -130,7 +133,7 @@ app.post("/login", async(req, res) => {
     if(!valid){
       return res.status(400).json({ message: "Incorrect password!" });
     }
-    const token = jwt.sign({ id: user._id }, "luxoraSecretKey123", { expiresIn: "7d" });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET || "luxoraSecretKey123", { expiresIn: "7d" });
     res.json({ token, email: user.email });
   } catch(err){
     res.status(500).json({ message: "Server error: " + err.message });
@@ -160,7 +163,7 @@ app.get("/orders", async(req, res) => {
 });
 
 /* SERVER */
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
